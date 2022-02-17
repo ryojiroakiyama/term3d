@@ -11,5 +11,5 @@ int	main(void)
 	idx = 0;
 	while (idx < len)
 		printf("%zu: x: %lf, y: %lf, z: %lf\n", \
-		idx, v[idx].x, v[idx].y, v[idx].z);
+		idx++, v[idx].x, v[idx].y, v[idx].z);
 }

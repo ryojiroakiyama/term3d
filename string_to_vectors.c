@@ -9,7 +9,7 @@ char	*string_to_vector(char *content, t_vector *vectors, \
 	char	buf[256];
 	int		error;
 
-	error = 0;
+	error = *content == '\n';
 	errno = 0;
 	vectors[index].x = strtod(content, &end);
 	error |= *end != ',' || errno == ERANGE;
@@ -20,7 +20,7 @@ char	*string_to_vector(char *content, t_vector *vectors, \
 	content = ++end;
 	errno = 0;
 	vectors[index].z = strtod(content, &end);
-	error |= !(*end == '\0' || *end == '\n') || errno == ERANGE;
+	error |= *end != '\n' || errno == ERANGE;
 	if (error)
 	{
 		sprintf(buf, "error: line %zu", index + 1);
@@ -38,10 +38,11 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size)
 	*vectors_size = count_new_line(content);
 	vectors = malloc(sizeof(*vectors) * *vectors_size);
 	index = 0;
-	while (index < *vectors_size)
+	while (*content)
 	{
 		content = string_to_vector(content, vectors, index, end);
 		++index;
 	}
+	*vectors_size = ++index;
 	return (vectors);
 }

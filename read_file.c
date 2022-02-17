@@ -24,7 +24,7 @@ char	*read_file(const char *file_name)
 	if (!file_content)
 		exit_with_error(NULL);
 	fread(file_content, sizeof(*file_content), sb.st_size, fp);
-	if (file_content[sb.st_size - 1] != '\n')
+	if (sb.st_size < 3 || file_content[sb.st_size - 1] != '\n')
 		exit_with_error("last line must be a blank line");
 	file_content[sb.st_size] = '\0';
 	return (file_content);
