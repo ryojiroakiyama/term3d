@@ -39,7 +39,7 @@ void	putmap(int *put, size_t size)
 {
 	size_t	i;
 
-	printf("\x1b[H");
+	//printf("\x1b[H");
 	i = 0;
 	while (i < size)
 	{
@@ -133,25 +133,23 @@ void mapping(t_vector v[])
 
 	init_matrix(matrix);
 	t_vector avector = average_vector(v);
-	//printf("%f, %f, %f\n", avector.x, avector.y, avector.z);
 	matrix[4 * 2 + 3] = -1 * avector.z;
-	//put_matrix(matrix);
 	cnt = 0;
 	while (cnt < v[0].len)
 	{
 		affine4(matrix, v+cnt);
 		cnt++;
 	}
-	degrees = 0;
+	degrees = 10;
+	init_matrix(matrix);
+	matrix[0] = cos(radians(degrees));
+	matrix[2] = sin(radians(degrees));
+	matrix[8] = -1 * sin(radians(degrees));
+	matrix[10] = cos(radians(degrees));
 	while(1)
 	{
 		cnt = 0;
 		bzero(put, sizeof(put));
-		init_matrix(matrix);
-		matrix[0] = cos(radians(degrees));
-		matrix[2] = sin(radians(degrees));
-		matrix[8] = -1 * sin(radians(degrees));
-		matrix[10] = cos(radians(degrees));
 		while (cnt < v[0].len)
 		{
 			affine4(matrix, v+cnt);
@@ -161,8 +159,7 @@ void mapping(t_vector v[])
 			cnt++;
 		}
 		putmap(put, TOTAL);
-		degrees += 10;
-		usleep(500000);
+		usleep(50000);
 	}
 }
 
