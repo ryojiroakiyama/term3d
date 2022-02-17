@@ -20,7 +20,7 @@ typedef struct s_vector {
 	size_t len;
 }t_vector;
 
-double	radians(double	degrees)
+double	to_radians(double	degrees)
 {
 	return (degrees * M_PI / 180);
 }
@@ -39,7 +39,7 @@ void	putmap(int *put, size_t size)
 {
 	size_t	i;
 
-	//printf("\x1b[H");
+	printf("\x1b[H");
 	i = 0;
 	while (i < size)
 	{
@@ -127,12 +127,30 @@ t_vector	average_vector(t_vector v[])
 	return ave;
 }
 
+void	rotate_y_axis(double matrix[])
+{
+	static unsigned int	degrees;
+	double				radians;
+
+	radians = to_radians(degrees);
+	init_matrix(matrix);
+	matrix[0] = cos(radians);
+	matrix[2] = sin(radians);
+	matrix[8] = -1 * sin(radians);
+	matrix[10] = cos(radians);
+	degrees += 10;
+}
+
+void	translate_xz_zero(double matrix[], const t_vector v[])
+{
+	
+}
+
 void mapping(t_vector v[])
 {
 	size_t	cnt;
 	int		index_put;
 	int		put[TOTAL];
-	int		degrees;
 	double	matrix[16];
 	t_vector	tmpvector;
 
@@ -146,16 +164,11 @@ void mapping(t_vector v[])
 		v[cnt] = affine4(matrix, &v[cnt]);
 		cnt++;
 	}
-	degrees = 0;
 	while(1)
 	{
 		cnt = 0;
 		bzero(put, sizeof(put));
-		init_matrix(matrix);
-		matrix[0] = cos(radians(degrees));
-		matrix[2] = sin(radians(degrees));
-		matrix[8] = -1 * sin(radians(degrees));
-		matrix[10] = cos(radians(degrees));
+		rotate_y_axis(matrix);
 		while (cnt < v[0].len)
 		{
 			tmpvector = affine4(matrix, v+cnt);
@@ -165,7 +178,6 @@ void mapping(t_vector v[])
 			cnt++;
 		}
 		putmap(put, TOTAL);
-		degrees += 20;
 		usleep(50000);
 	}
 }
