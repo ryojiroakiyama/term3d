@@ -1,15 +1,21 @@
 #include "term3d.h"
-#include <stdio.h>
 
-int	main(void)
+int main(void)
 {
-	size_t		len;
-	size_t		idx;
-	t_vector	*v;
+	t_draw		draw;
+	t_vector	ave_vecs;
 
-	v = string_to_vectors(read_file("./torus.3d"), &len);
-	idx = 0;
-	while (idx < len)
-		printf("%zu: x: %lf, y: %lf, z: %lf\n", \
-		idx++, v[idx].x, v[idx].y, v[idx].z);
+	draw.vecs = string_to_vectors(read_file("./torus.3d"), &(draw.vecs_size));
+	ave_vecs = get_average_vectors(draw.vecs, draw.vecs_size);
+	matrix_translate(draw.matrix4, -1 * ave_vecs.x, 0, -1 * ave_vecs.z);
+	iter(&draw, do_matrix);
+	while(1)
+	{
+		bzero(draw.map, sizeof(draw.map));
+		matrix_rotate(draw.matrix4);
+		iter(&draw, mapping);
+		putmap(draw.map, TOTALBIT);
+		usleep(50000);
+	}
+	//free?
 }
