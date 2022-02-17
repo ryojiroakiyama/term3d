@@ -179,37 +179,21 @@ void	map(t_vector *v, double matrix[], int put[])
 		put[pixel]++;
 }
 
-void mapping(t_vector v[])
+void	start(t_vector v[])
 {
-	size_t	cnt;
-	int		index_put;
-	int		put[TOTAL];
-	double	matrix[16];
-	t_vector	tmpvector;
+	int			index_put;
+	int			put[TOTAL];
+	double		matrix[16];
+	t_vector	ave;
 
-	t_vector ave = get_average_vector(v);
+	ave = get_average_vector(v);
 	matrix_translate(matrix, -1 * ave.x, 0, -1 * ave.z);
-	//cnt = 0;
-	//while (cnt < v[0].len)
-	//{
-	//	v[cnt] = affine4(matrix, &v[cnt]);
-	//	cnt++;
-	//}
 	iter(v, matrix, NULL, init_coordinate);
 	while(1)
 	{
 		bzero(put, sizeof(put));
 		matrix_rotate(matrix);
 		iter(v, matrix, put, map);
-		//cnt = 0;
-		//while (cnt < v[0].len)
-		//{
-		//	tmpvector = affine4(matrix, v+cnt);
-		//	index_put = convert_to_putindex(&tmpvector);
-		//	if (0 <= index_put && index_put <= TOTAL && put[index_put] < 3)
-		//		put[index_put]++;
-		//	cnt++;
-		//}
 		putmap(put, TOTAL);
 		usleep(50000);
 	}
@@ -248,5 +232,5 @@ int main(void)
 	}
 	close(fd);
 	v[0].len = cnt;
-	mapping(v);
+	start(v);
 }
