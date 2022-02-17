@@ -1,12 +1,7 @@
 #ifndef TERM3D_H
 # define TERM3D_H
 
-#include <string.h>
-#include <unistd.h>
-#include <stdbool.h>
-#include <stdlib.h>
 #include <stddef.h>
-#include <math.h>
 
 #define WIDTH 50
 #define HEIGHT 20

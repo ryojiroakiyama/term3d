@@ -1,4 +1,6 @@
 #include "term3d.h"
+#include <strings.h>
+#include <unistd.h>
 
 int main(void)
 {

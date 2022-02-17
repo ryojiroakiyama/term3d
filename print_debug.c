@@ -21,5 +21,8 @@ void	put_vectors(t_vector *vecs, size_t vecs_size)
 
 	idx = 0;
 	while (idx < vecs_size)
-		printf("%zu: x: %lf, y: %lf, z: %lf\n", idx++, vecs[idx].x, vecs[idx].y, vecs[idx].z);
+	{
+		printf("%zu: x: %lf, y: %lf, z: %lf\n", idx, vecs[idx].x, vecs[idx].y, vecs[idx].z);
+		idx++;
+	}
 }

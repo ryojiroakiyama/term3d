@@ -1,4 +1,5 @@
 #include "term3d.h"
+#include <math.h>
 
 void	init_matrix(double matrix[])
 {
