@@ -107,7 +107,7 @@ void	put_matrix(const double matrix[])
 	}
 }
 
-t_vector	average_vector(t_vector v[])
+t_vector	get_average_vector(t_vector v[])
 {
 	size_t		index;
 	t_vector	ave;
@@ -127,7 +127,7 @@ t_vector	average_vector(t_vector v[])
 	return ave;
 }
 
-void	rotate_y_axis(double matrix[])
+void	matrix_rotate(double matrix[])
 {
 	static unsigned int	degrees;
 	double				radians;
@@ -141,9 +141,42 @@ void	rotate_y_axis(double matrix[])
 	degrees += 10;
 }
 
-void	translate_xz_zero(double matrix[], const t_vector v[])
+void	matrix_translate(double matrix[], const double x, const double y, const double z)
 {
-	
+	init_matrix(matrix);
+	matrix[4 * 0 + 3] = x;
+	matrix[4 * 1 + 3] = y;
+	matrix[4 * 2 + 3] = z;
+}
+
+void	iter(t_vector *v, double matrix[], int put[], 
+				void (*f)(t_vector v[], double m[], int p[]))
+{
+	size_t cnt;
+
+	cnt = 0;
+	while (cnt < v[0].len)
+	{
+		f(v+cnt, matrix, put);
+		cnt++;
+	}
+}
+
+void	init_coordinate(t_vector *v, double matrix[], int put[])
+{
+	(void)put;
+	*v = affine4(matrix, v);
+}
+
+void	map(t_vector *v, double matrix[], int put[])
+{
+	t_vector	tmp;
+	int			pixel;
+
+	tmp = affine4(matrix, v);
+	pixel = convert_to_putindex(&tmp);
+	if (0 <= pixel && pixel <= TOTAL && put[pixel] < 3)
+		put[pixel]++;
 }
 
 void mapping(t_vector v[])
@@ -154,29 +187,29 @@ void mapping(t_vector v[])
 	double	matrix[16];
 	t_vector	tmpvector;
 
-	init_matrix(matrix);
-	t_vector avector = average_vector(v);
-	matrix[4 * 0 + 3] = -1 * avector.x;
-	matrix[4 * 2 + 3] = -1 * avector.z;
-	cnt = 0;
-	while (cnt < v[0].len)
-	{
-		v[cnt] = affine4(matrix, &v[cnt]);
-		cnt++;
-	}
+	t_vector ave = get_average_vector(v);
+	matrix_translate(matrix, -1 * ave.x, 0, -1 * ave.z);
+	//cnt = 0;
+	//while (cnt < v[0].len)
+	//{
+	//	v[cnt] = affine4(matrix, &v[cnt]);
+	//	cnt++;
+	//}
+	iter(v, matrix, NULL, init_coordinate);
 	while(1)
 	{
-		cnt = 0;
 		bzero(put, sizeof(put));
-		rotate_y_axis(matrix);
-		while (cnt < v[0].len)
-		{
-			tmpvector = affine4(matrix, v+cnt);
-			index_put = convert_to_putindex(&tmpvector);
-			if (0 <= index_put && index_put <= TOTAL && put[index_put] < 3)
-				put[index_put]++;
-			cnt++;
-		}
+		matrix_rotate(matrix);
+		iter(v, matrix, put, map);
+		//cnt = 0;
+		//while (cnt < v[0].len)
+		//{
+		//	tmpvector = affine4(matrix, v+cnt);
+		//	index_put = convert_to_putindex(&tmpvector);
+		//	if (0 <= index_put && index_put <= TOTAL && put[index_put] < 3)
+		//		put[index_put]++;
+		//	cnt++;
+		//}
 		putmap(put, TOTAL);
 		usleep(50000);
 	}
