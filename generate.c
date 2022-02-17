@@ -8,7 +8,7 @@
 #define WIDTHBIT 60
 #define HEIGHTBIT 20
 #define TOTALBIT (WIDTHBIT * HEIGHTBIT)
-#define OFFSETBIT 10
+#define OFFSETBIT 5
 
 typedef struct s_vector {
     double x;
@@ -27,31 +27,10 @@ void	putmap(int *put, size_t size)
 		if (i % WIDTHBIT == 0)
 			putchar('\n');
 		else
-			putchar(put[i] + '0');
+			putchar(" .*#"[put[i]]);
 		i++;
 	}
 	putchar('\n');
-}
-
-void	section(void)
-{
-	int j = 0;
-	while (j < 20)
-	{
-		int i = 0;
-		while (i < 10)
-		{
-			putchar(' ');
-			i++;
-		}
-		while (i < 60)
-		{
-			putchar('.');
-			i++;
-		}
-		putchar('\n');
-		j++;
-	}
 }
 
 int	convert(const t_vector *v)
@@ -59,10 +38,8 @@ int	convert(const t_vector *v)
 	int	xi;
 	int	yi;
 
-	//printf("x:%f, y%f\n", v->x, v->y);
-	xi = (int)(5 * v->x) +(WIDTHBIT / 2);
-	yi = (int)(-1 * v->y) + (HEIGHTBIT / 2);
-	//printf("xi:%d, yi%d\n", xi, yi);
+	xi = (int)(6 * v->x) +(WIDTHBIT / 2);
+	yi = (int)(-3 * v->y) + (HEIGHTBIT / 2);
 	return yi * WIDTHBIT + xi + OFFSETBIT;
 }
 
@@ -79,7 +56,7 @@ void mapping(t_vector v[])
 	while (i < v[0].len)
 	{
 		point = convert(v+i);
-		if (0 <= point && point <= TOTALBIT && put[point] < 9)
+		if (0 <= point && point <= TOTALBIT && put[point] < 3)
 			put[point]++;
 		i++;
 	}
@@ -103,7 +80,6 @@ void set_vector(t_vector *v, char *s, size_t len)
 
 int main(void)
 {
-	//section();
 	t_vector	v[5000];
 	char *line;
 	int fd;
@@ -119,9 +95,6 @@ int main(void)
 		free(line);
 	}
 	close(fd);
-	//set_vector(v, "0.544456534909866,2.5718969675658103,5", 3);
-	//set_vector(v+1, "3.761971793423513,-3.4237940770708266,5.143797326596529", 3);
-	//set_vector(v+2, "1.9618820122077107,0.251473437357552,5.2861578778387805", 3);
 	v[0].len = cnt;
 	mapping(v);
 }
