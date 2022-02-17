@@ -20,7 +20,7 @@ typedef struct s_vector {
 	size_t len;
 }t_vector;
 
-double	to_radians(double	degrees)
+double	to_radians(double degrees)
 {
 	return (degrees * M_PI / 180);
 }
@@ -168,7 +168,7 @@ void	init_coordinate(t_vector *v, double matrix[], int put[])
 	*v = affine4(matrix, v);
 }
 
-void	map(t_vector *v, double matrix[], int put[])
+void	mapping(t_vector *v, double matrix[], int put[])
 {
 	t_vector	tmp;
 	int			pixel;
@@ -193,7 +193,7 @@ void	start(t_vector v[])
 	{
 		bzero(put, sizeof(put));
 		matrix_rotate(matrix);
-		iter(v, matrix, put, map);
+		iter(v, matrix, put, mapping);
 		putmap(put, TOTAL);
 		usleep(50000);
 	}
