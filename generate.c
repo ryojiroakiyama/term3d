@@ -17,8 +17,13 @@ typedef struct s_vector {
     double x;
     double y;
     double z;
-	size_t len;
 }t_vector;
+
+typedef struct	s_draw
+{
+	t_vector 	*vecs;
+	double		matrix4[16];
+}	t_draw;
 
 double	to_radians(double degrees)
 {
