@@ -5,10 +5,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define WIDTHBIT 60
-#define HEIGHTBIT 20
-#define TOTALBIT (WIDTHBIT * HEIGHTBIT)
-#define OFFSETBIT 5
+#define WIDTH 50
+#define HEIGHT 20
+#define TOTAL (WIDTH * HEIGHT)
+#define OFFSET 5
 
 typedef struct s_vector {
     double x;
@@ -24,7 +24,7 @@ void	putmap(int *put, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		if (i % WIDTHBIT == 0)
+		if (i % WIDTH == 0)
 			putchar('\n');
 		else
 			putchar(" .*#"[put[i]]);
@@ -33,34 +33,34 @@ void	putmap(int *put, size_t size)
 	putchar('\n');
 }
 
-int	convert(const t_vector *v)
+int	coordinate_to_put(const t_vector *v)
 {
 	int	xi;
 	int	yi;
 
-	xi = (int)(6 * v->x) +(WIDTHBIT / 2);
-	yi = (int)(-3 * v->y) + (HEIGHTBIT / 2);
-	return yi * WIDTHBIT + xi + OFFSETBIT;
+	xi = (int)(6 * v->x) +(WIDTH / 2);
+	yi = (int)(-3 * v->y) + (HEIGHT / 2);
+	return yi * WIDTH + xi + OFFSET;
 }
 
 void mapping(t_vector v[])
 {
-	size_t	i;
-	int		point;
-	int		put[TOTALBIT];
+	size_t	cnt;
+	int		index_put;
+	int		put[TOTAL];
 
 	if (!v)
 		exit(1);
 	bzero(put, sizeof(put));
-	i = 0;
-	while (i < v[0].len)
+	cnt = 0;
+	while (cnt < v[0].len)
 	{
-		point = convert(v+i);
-		if (0 <= point && point <= TOTALBIT && put[point] < 3)
-			put[point]++;
-		i++;
+		index_put = coordinate_to_put(v+cnt);
+		if (0 <= index_put && index_put <= TOTAL && put[index_put] < 3)
+			put[index_put]++;
+		cnt++;
 	}
-	putmap(put, TOTALBIT);
+	putmap(put, TOTAL);
 }
 
 #include "../libft/libft.h"
