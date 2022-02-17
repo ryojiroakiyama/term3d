@@ -9,6 +9,9 @@
 #define HEIGHT 20
 #define TOTAL (WIDTH * HEIGHT)
 #define OFFSET 5
+# ifndef M_PI
+#  define M_PI 3.141592653589793
+# endif
 
 typedef struct s_vector {
     double x;
@@ -17,10 +20,26 @@ typedef struct s_vector {
 	size_t len;
 }t_vector;
 
+double	radians(double	degrees)
+{
+	return (degrees * M_PI / 180);
+}
+
+t_vector	zero_vector(void)
+{
+	t_vector	a;
+
+	a.x = 0;
+	a.y = 0;
+	a.z = 0;
+	return (a);
+}
+
 void	putmap(int *put, size_t size)
 {
 	size_t	i;
 
+	printf("\x1b[H");
 	i = 0;
 	while (i < size)
 	{
@@ -33,7 +52,7 @@ void	putmap(int *put, size_t size)
 	putchar('\n');
 }
 
-int	coordinate_to_put(const t_vector *v)
+int	convert_to_putindex(const t_vector *v)
 {
 	int	xi;
 	int	yi;
@@ -43,24 +62,108 @@ int	coordinate_to_put(const t_vector *v)
 	return yi * WIDTH + xi + OFFSET;
 }
 
+static double	calculate(const double *matrix, const t_vector *v)
+{
+	return ((matrix[0] * v->x) + (matrix[1] * v->y) + (matrix[2] * v->z) + matrix[3]);
+}
+
+void	affine4(const double matrix[], t_vector *v)
+{
+	v->x = calculate(matrix, v);
+	v->y = calculate(matrix + 4, v);
+	v->z = calculate(matrix + 8, v);
+}
+
+void	init_matrix(double matrix[])
+{
+	int	i;
+
+	i = 0;
+	while (i < 16)
+	{
+		if (i % 5 == 0)
+			matrix[i] = 1;
+		else
+			matrix[i] = 0;
+		i++;
+	}
+}
+
+void	put_matrix(const double matrix[])
+{
+	int	i;
+
+	i = 0;
+	while (i < 16)
+	{
+		if (i % 4 == 0)
+			printf("\n");
+		printf(" %f,", matrix[i]);
+		i++;
+	}
+}
+
+t_vector	average_vector(t_vector v[])
+{
+	size_t		index;
+	t_vector	ave;
+
+	index = 0;
+	ave = zero_vector();
+	while (index < v[0].len)
+	{
+		ave.x += v[index].x;
+		ave.y += v[index].y;
+		ave.z += v[index].z;
+		index++;
+	}
+	ave.x /= v[0].len;
+	ave.y /= v[0].len;
+	ave.z /= v[0].len;
+	return ave;
+}
+
 void mapping(t_vector v[])
 {
 	size_t	cnt;
 	int		index_put;
 	int		put[TOTAL];
+	int		degrees;
+	double	matrix[16];
 
-	if (!v)
-		exit(1);
-	bzero(put, sizeof(put));
+	init_matrix(matrix);
+	t_vector avector = average_vector(v);
+	//printf("%f, %f, %f\n", avector.x, avector.y, avector.z);
+	matrix[4 * 2 + 3] = -1 * avector.z;
+	//put_matrix(matrix);
 	cnt = 0;
 	while (cnt < v[0].len)
 	{
-		index_put = coordinate_to_put(v+cnt);
-		if (0 <= index_put && index_put <= TOTAL && put[index_put] < 3)
-			put[index_put]++;
+		affine4(matrix, v+cnt);
 		cnt++;
 	}
-	putmap(put, TOTAL);
+	degrees = 0;
+	while(1)
+	{
+		cnt = 0;
+		bzero(put, sizeof(put));
+		init_matrix(matrix);
+		matrix[0] = cos(radians(degrees));
+		matrix[2] = sin(radians(degrees));
+		matrix[8] = -1 * sin(radians(degrees));
+		matrix[10] = cos(radians(degrees));
+		while (cnt < v[0].len)
+		{
+			affine4(matrix, v+cnt);
+			index_put = convert_to_putindex(v+cnt);
+			if (0 <= index_put && index_put <= TOTAL && put[index_put] < 3)
+				put[index_put]++;
+			cnt++;
+		}
+		putmap(put, TOTAL);
+		degrees += 10;
+		usleep(500000);
+	}
 }
 
 #include "../libft/libft.h"
