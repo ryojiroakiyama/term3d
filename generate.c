@@ -67,11 +67,15 @@ static double	calculate(const double *matrix, const t_vector *v)
 	return ((matrix[0] * v->x) + (matrix[1] * v->y) + (matrix[2] * v->z) + matrix[3]);
 }
 
-void	affine4(const double matrix[], t_vector *v)
+t_vector	affine4(const double matrix[], const t_vector *v)
 {
-	v->x = calculate(matrix, v);
-	v->y = calculate(matrix + 4, v);
-	v->z = calculate(matrix + 8, v);
+	t_vector	a;
+
+	a.x = calculate(matrix, v);
+	a.y = calculate(matrix + 4, v);
+	a.z = calculate(matrix + 8, v);
+	a.len = v->len;
+	return a;
 }
 
 void	init_matrix(double matrix[])
@@ -130,35 +134,38 @@ void mapping(t_vector v[])
 	int		put[TOTAL];
 	int		degrees;
 	double	matrix[16];
+	t_vector	tmpvector;
 
 	init_matrix(matrix);
 	t_vector avector = average_vector(v);
+	matrix[4 * 0 + 3] = -1 * avector.x;
 	matrix[4 * 2 + 3] = -1 * avector.z;
 	cnt = 0;
 	while (cnt < v[0].len)
 	{
-		affine4(matrix, v+cnt);
+		v[cnt] = affine4(matrix, &v[cnt]);
 		cnt++;
 	}
-	degrees = 10;
-	init_matrix(matrix);
-	matrix[0] = cos(radians(degrees));
-	matrix[2] = sin(radians(degrees));
-	matrix[8] = -1 * sin(radians(degrees));
-	matrix[10] = cos(radians(degrees));
+	degrees = 0;
 	while(1)
 	{
 		cnt = 0;
 		bzero(put, sizeof(put));
+		init_matrix(matrix);
+		matrix[0] = cos(radians(degrees));
+		matrix[2] = sin(radians(degrees));
+		matrix[8] = -1 * sin(radians(degrees));
+		matrix[10] = cos(radians(degrees));
 		while (cnt < v[0].len)
 		{
-			affine4(matrix, v+cnt);
-			index_put = convert_to_putindex(v+cnt);
+			tmpvector = affine4(matrix, v+cnt);
+			index_put = convert_to_putindex(&tmpvector);
 			if (0 <= index_put && index_put <= TOTAL && put[index_put] < 3)
 				put[index_put]++;
 			cnt++;
 		}
 		putmap(put, TOTAL);
+		degrees += 20;
 		usleep(50000);
 	}
 }
