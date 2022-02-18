@@ -30,7 +30,8 @@ void	matrix_rotate(double matrix[])
 	degrees += 10;
 }
 
-void	matrix_translate(double matrix[], const double x, const double y, const double z)
+void	matrix_translate(double matrix[], const double x, \
+							const double y, const double z)
 {
 	init_matrix(matrix);
 	matrix[4 * 0 + 3] = x;

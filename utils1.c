@@ -2,9 +2,9 @@
 #include <math.h>
 #include <stdio.h>
 
-# ifndef M_PI
-#  define M_PI 3.141592653589793
-# endif
+#ifndef M_PI
+# define M_PI 3.141592653589793
+#endif
 
 double	to_radians(double degrees)
 {
@@ -55,5 +55,5 @@ t_vector	get_average_vectors(const t_vector *v, const size_t size)
 	ave.x /= size;
 	ave.y /= size;
 	ave.z /= size;
-	return ave;
+	return (ave);
 }

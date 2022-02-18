@@ -2,7 +2,7 @@
 #include <strings.h>
 #include <unistd.h>
 
-int main(void)
+int	main(void)
 {
 	t_draw		draw;
 	t_vector	ave_vecs;
@@ -11,7 +11,7 @@ int main(void)
 	ave_vecs = get_average_vectors(draw.vecs, draw.vecs_size);
 	matrix_translate(draw.matrix4, -1 * ave_vecs.x, 0, -1 * ave_vecs.z);
 	iter(&draw, do_matrix);
-	while(1)
+	while (1)
 	{
 		bzero(draw.map, sizeof(draw.map));
 		matrix_rotate(draw.matrix4);
