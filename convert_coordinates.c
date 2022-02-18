@@ -4,10 +4,14 @@ int	convert_to_mapindex(const t_vector *v)
 {
 	int		xi;
 	int		yi;
+	int		xi_max;
+	int		yi_max;
 
-	xi = (int)(SCALE * ((float)XIMG / YIMG) * v->x) + (XIMG / 2);
-	yi = (int)(SCALE * v->y) + (YIMG / 2);
-	if (xi < 0 || XIMG < xi)
+	xi_max = W_MAP - 1;
+	yi_max = H_MAP - 1;
+	xi = (int)(SCALE * ((float)xi_max / yi_max) * v->x) + (xi_max / 2);
+	yi = (int)(SCALE * v->y) + (yi_max / 2);
+	if (xi < 0 || xi_max < xi)
 		return (-1);
-	return (yi * XMAP + xi);
+	return (yi * W_MAP + xi);
 }

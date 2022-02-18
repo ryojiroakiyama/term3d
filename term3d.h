@@ -3,10 +3,8 @@
 
 #include <stddef.h>
 
-#define XIMG 60
-#define YIMG 30
-#define XMAP (XIMG + 1)
-#define YMAP (YIMG + 1)
+#define W_MAP 61
+#define H_MAP 31
 #define SCALE 5
 #define OFFSET 5
 
@@ -22,7 +20,7 @@ typedef struct	s_draw
 	t_vector 	*vecs;
 	size_t		vecs_size;
 	double		matrix4[16];
-	int			map[XMAP * YMAP];
+	int			map[W_MAP * H_MAP];
 	int			map_size;
 }	t_draw;
 

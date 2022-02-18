@@ -21,9 +21,9 @@ void	putmap(int *put, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		if (i % XMAP == 0)
+		if (i % W_MAP == 0)
 			putoffset();
-		if ((i + 1) % XMAP == 0)
+		if ((i + 1) % W_MAP == 0)
 			putchar('\n');
 		putchar(" .*#"[put[i]]);
 		i++;
