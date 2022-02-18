@@ -1,20 +1,18 @@
 #include "term3d.h"
+#include <math.h>
 
-void	vecs_iter(t_draw *d, void (*f)(t_vector *v, t_draw *d))
+#ifndef M_PI
+# define M_PI 3.141592653589793
+#endif
+
+double	to_radians(double degrees)
 {
-	size_t	cnt;
-
-	cnt = 0;
-	while (cnt < d->vecs_size)
-	{
-		f(d->vecs + cnt, d);
-		cnt++;
-	}
+	return (degrees * M_PI / 180);
 }
 
 void	do_matrix(t_vector *v, t_draw *d)
 {
-	*v = affine4(d->matrix4, v);
+	*v = affine(d->matrix4, v);
 }
 
 void	mapping(t_vector *v, t_draw *d)
@@ -22,7 +20,7 @@ void	mapping(t_vector *v, t_draw *d)
 	t_vector	tmp;
 	int			pixel;
 
-	tmp = affine4(d->matrix4, v);
+	tmp = affine(d->matrix4, v);
 	pixel = convert_to_mapindex(&tmp);
 	if (0 <= pixel && pixel <= d->map_size && d->map[pixel] < 3)
 		d->map[pixel]++;
