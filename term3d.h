@@ -3,9 +3,11 @@
 
 #include <stddef.h>
 
-#define WIDTH 80
-#define HEIGHT 30
-#define SCALE 3
+#define XIMG 80
+#define YIMG 30
+#define XMAP (XIMG + 1)
+#define YMAP (YIMG + 1)
+#define SCALE 4
 #define OFFSET 0
 
 typedef struct s_vector
@@ -20,7 +22,7 @@ typedef struct	s_draw
 	t_vector 	*vecs;
 	size_t		vecs_size;
 	double		matrix4[16];
-	int			map[WIDTH * HEIGHT];
+	int			map[XMAP * YMAP];
 	int			map_size;
 }	t_draw;
 

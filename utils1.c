@@ -29,10 +29,9 @@ void	putmap(int *put, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		if (i % WIDTH == 0)
+		if ((i + 1) % XMAP == 0)
 			putchar('\n');
-		else
-			putchar(" .*#"[put[i]]);
+		putchar(" .*#"[put[i]]);
 		i++;
 	}
 	putchar('\n');

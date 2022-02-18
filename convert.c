@@ -5,9 +5,9 @@ int	convert_to_putindex(const t_vector *v)
 	int		xi;
 	int		yi;
 
-	xi = (int)(SCALE * ((float)WIDTH / HEIGHT) * v->x) + (WIDTH / 2);
-	yi = (int)(SCALE * v->y) + (HEIGHT / 2);
-	return (yi * WIDTH + xi + OFFSET);
+	xi = (int)(SCALE * ((float)XIMG / YIMG) * v->x) + (XIMG / 2);
+	yi = (int)(SCALE * v->y) + (YIMG / 2);
+	return (yi * XMAP + xi);
 }
 
 static double	calculate_oneline(const double *matrix, const t_vector *v)
