@@ -11,12 +11,12 @@ int	main(void)
 	draw.vecs = string_to_vectors(read_file("./torus.3d"), &(draw.vecs_size));
 	ave_vecs = get_average_vectors(draw.vecs, draw.vecs_size);
 	matrix_translate(draw.matrix4, -1 * ave_vecs.x, 0, -1 * ave_vecs.z);
-	iter(&draw, do_matrix);
+	vecs_iter(&draw, do_matrix);
 	while (1)
 	{
 		bzero(draw.map, sizeof(draw.map));
-		matrix_rotate(draw.matrix4);
-		iter(&draw, mapping);
+		matrix_rotate_y(draw.matrix4);
+		vecs_iter(&draw, mapping);
 		putmap(draw.map, draw.map_size);
 		usleep(50000);
 	}

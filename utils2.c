@@ -1,6 +1,6 @@
 #include "term3d.h"
 
-void	iter(t_draw *d, void (*f)(t_vector *v, t_draw *d))
+void	vecs_iter(t_draw *d, void (*f)(t_vector *v, t_draw *d))
 {
 	size_t	cnt;
 

@@ -16,7 +16,7 @@ void	init_matrix(double matrix[])
 	}
 }
 
-void	matrix_rotate(double matrix[])
+void	matrix_rotate_y(double matrix[])
 {
 	static unsigned int	degrees;
 	double				radians;
