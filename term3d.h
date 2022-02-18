@@ -20,8 +20,8 @@ typedef struct	s_draw
 	t_vector 	*vecs;
 	size_t		vecs_size;
 	double		matrix4[16];
-	int			size;
 	int			map[WIDTH * HEIGHT];
+	int			map_size;
 }	t_draw;
 
 t_vector	*string_to_vectors(char *content, size_t *vectors_size);
