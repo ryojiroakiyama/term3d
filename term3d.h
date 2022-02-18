@@ -7,6 +7,7 @@
 #define H_MAP 31
 #define SCALE 5
 #define OFFSET 5
+#define ASCII " .+*$A"
 
 typedef struct s_vector
 {
