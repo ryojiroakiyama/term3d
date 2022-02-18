@@ -5,7 +5,6 @@
 
 #define WIDTH 50
 #define HEIGHT 20
-#define TOTALBIT 1000
 #define OFFSET 5
 
 typedef struct s_vector
@@ -20,7 +19,8 @@ typedef struct	s_draw
 	t_vector 	*vecs;
 	size_t		vecs_size;
 	double		matrix4[16];
-	int			map[TOTALBIT];
+	int			size;
+	int			map[WIDTH * HEIGHT];
 }	t_draw;
 
 t_vector	*string_to_vectors(char *content, size_t *vectors_size);

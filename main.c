@@ -7,6 +7,7 @@ int	main(void)
 	t_draw		draw;
 	t_vector	ave_vecs;
 
+	draw.size = WIDTH * HEIGHT;
 	draw.vecs = string_to_vectors(read_file("./torus.3d"), &(draw.vecs_size));
 	ave_vecs = get_average_vectors(draw.vecs, draw.vecs_size);
 	matrix_translate(draw.matrix4, -1 * ave_vecs.x, 0, -1 * ave_vecs.z);
@@ -16,7 +17,7 @@ int	main(void)
 		bzero(draw.map, sizeof(draw.map));
 		matrix_rotate(draw.matrix4);
 		iter(&draw, mapping);
-		putmap(draw.map, TOTALBIT);
+		putmap(draw.map, draw.size);
 		usleep(50000);
 	}
 	//free?
