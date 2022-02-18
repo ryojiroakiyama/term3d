@@ -34,7 +34,6 @@ void	putmap(int *put, size_t size)
 		putchar(" .*#"[put[i]]);
 		i++;
 	}
-	putchar('\n');
 }
 
 t_vector	get_average_vectors(const t_vector *v, const size_t size)

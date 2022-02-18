@@ -23,7 +23,7 @@ void	mapping(t_vector *v, t_draw *d)
 	int			pixel;
 
 	tmp = affine4(d->matrix4, v);
-	pixel = convert_to_putindex(&tmp);
+	pixel = convert_to_mapindex(&tmp);
 	if (0 <= pixel && pixel <= d->map_size && d->map[pixel] < 3)
 		d->map[pixel]++;
 }

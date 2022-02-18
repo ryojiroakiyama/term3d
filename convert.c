@@ -1,6 +1,6 @@
 #include "term3d.h"
 
-int	convert_to_putindex(const t_vector *v)
+int	convert_to_mapindex(const t_vector *v)
 {
 	int		xi;
 	int		yi;

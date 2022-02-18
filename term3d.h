@@ -30,7 +30,7 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size);
 char		*read_file(const char *file_name);
 size_t		count_new_line(char *content);
 void		exit_with_error(const char *massage);
-int			convert_to_putindex(const t_vector *v);
+int			convert_to_mapindex(const t_vector *v);
 t_vector	affine4(const double matrix[], const t_vector *v);
 void		init_matrix(double matrix[]);
 void		matrix_rotate_y(double matrix[]);
