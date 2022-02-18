@@ -3,12 +3,12 @@
 
 #include <stddef.h>
 
-#define XIMG 80
+#define XIMG 60
 #define YIMG 30
 #define XMAP (XIMG + 1)
 #define YMAP (YIMG + 1)
-#define SCALE 4
-#define OFFSET 0
+#define SCALE 5
+#define OFFSET 5
 
 typedef struct s_vector
 {
