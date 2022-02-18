@@ -3,9 +3,10 @@
 
 #include <stddef.h>
 
-#define WIDTH 50
-#define HEIGHT 20
-#define OFFSET 5
+#define WIDTH 80
+#define HEIGHT 30
+#define SCALE 3
+#define OFFSET 0
 
 typedef struct s_vector
 {

@@ -2,11 +2,11 @@
 
 int	convert_to_putindex(const t_vector *v)
 {
-	int	xi;
-	int	yi;
+	int		xi;
+	int		yi;
 
-	xi = (int)(6 * v->x) + (WIDTH / 2);
-	yi = (int)(-3 * v->y) + (HEIGHT / 2);
+	xi = (int)(SCALE * ((float)WIDTH / HEIGHT) * v->x) + (WIDTH / 2);
+	yi = (int)(SCALE * v->y) + (HEIGHT / 2);
 	return (yi * WIDTH + xi + OFFSET);
 }
 
