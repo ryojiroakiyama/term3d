@@ -20,9 +20,10 @@ typedef struct	s_draw
 {
 	t_vector 	*vecs;
 	size_t		vecs_size;
-	double		matrix4[16];
+	t_vector	vecs_ave;
 	int			map[W_MAP * H_MAP];
 	int			map_size;
+	double		matrix4[16];
 }	t_draw;
 
 t_vector	*string_to_vectors(char *content, size_t *vectors_size);
@@ -37,10 +38,9 @@ void		matrix_translate(double matrix[], const double x, const double y, const do
 void		put_matrix(const double matrix[]);
 void		put_vectors(t_vector *vecs, size_t vecs_size);
 double		to_radians(double degrees);
-t_vector	zero_vector(void);
 void		putmap(int *put, size_t size);
-t_vector	get_average_vectors(const t_vector *v, const size_t size);
 void		vecs_iter(t_draw *d, void (*f)(t_vector *v, t_draw *d));
+void		get_average_vecs(t_vector *v, t_draw *d);
 void		do_matrix(t_vector *v, t_draw *d);
 void		mapping(t_vector *v, t_draw *d);
 
