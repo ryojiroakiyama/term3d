@@ -13,7 +13,7 @@ static void	putoffset(void)
 	}
 }
 
-void	putmap(int *put, size_t size)
+void	put_map(int *put, size_t size)
 {
 	size_t	i;
 

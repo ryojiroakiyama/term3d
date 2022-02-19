@@ -1,7 +1,7 @@
 #include "term3d.h"
 #include <string.h>
 
-void	iterate_vecs(t_draw *d, void (*f)(t_vector *v, t_draw *d))
+void	iterate_vectors(t_draw *d, void (*f)(t_vector *v, t_draw *d))
 {
 	size_t	cnt;
 
@@ -13,7 +13,7 @@ void	iterate_vecs(t_draw *d, void (*f)(t_vector *v, t_draw *d))
 	}
 }
 
-void	average_vecs(t_vector *v, t_draw *d)
+void	average_vectors(t_vector *v, t_draw *d)
 {
 	static size_t	cnt;
 

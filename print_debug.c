@@ -15,7 +15,7 @@ void	put_matrix(const double matrix[])
 	}
 }
 
-void	put_vecs(t_vector *vecs, size_t vecs_size)
+void	put_vectors(t_vector *vecs, size_t vecs_size)
 {
 	size_t		idx;
 
