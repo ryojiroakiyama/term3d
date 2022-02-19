@@ -1,13 +1,13 @@
 #ifndef TERM3D_H
 # define TERM3D_H
 
-#include <stddef.h>
+# include <stddef.h>
 
-#define W_MAP 61
-#define H_MAP 31
-#define SCALE 5
-#define OFFSET 5
-#define ASCII " .+*$A"
+# define W_MAP 61
+# define H_MAP 31
+# define SCALE 5
+# define OFFSET 5
+# define ASCII " .+*$A"
 
 typedef struct s_vector
 {
@@ -16,9 +16,9 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
-typedef struct	s_draw
+typedef struct s_draw
 {
-	t_vector 	*vecs;
+	t_vector	*vecs;
 	size_t		vecs_size;
 	t_vector	vecs_ave;
 	int			map[W_MAP * H_MAP];
@@ -32,12 +32,12 @@ size_t		count_new_line(char *content);
 void		exit_with_error(const char *massage);
 int			convert_to_mapindex(const t_vector *v);
 t_vector	affine(const double matrix[], const t_vector *v);
-void		init_matrix(double matrix[]);
+void		matrix_unit(double matrix[]);
 void		matrix_rotate_y(double matrix[]);
-void		matrix_translate(double matrix[], const double x, const double y, const double z);
+void		matrix_translate(double matrix[], \
+							const double x, const double y, const double z);
 void		put_matrix(const double matrix[]);
 void		put_vectors(t_vector *vecs, size_t vecs_size);
-double		to_radians(double degrees);
 void		putmap(int *put, size_t size);
 void		vecs_iter(t_draw *d, void (*f)(t_vector *v, t_draw *d));
 void		get_average_vecs(t_vector *v, t_draw *d);

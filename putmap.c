@@ -1,7 +1,7 @@
 #include "term3d.h"
 #include <stdio.h>
 
-static void putoffset(void)
+static void	putoffset(void)
 {
 	int	cnt;
 
