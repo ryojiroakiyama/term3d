@@ -13,7 +13,7 @@ void	iterate_vectors(t_draw *d, void (*f)(t_vector *v, t_draw *d))
 	}
 }
 
-void	average_vectors(t_vector *v, t_draw *d)
+void	get_average(t_vector *v, t_draw *d)
 {
 	static size_t	cnt;
 

@@ -8,7 +8,7 @@ int	main(void)
 
 	draw.map_size = W_MAP * H_MAP;
 	draw.vecs = string_to_vectors(read_file("./torus.3d"), &(draw.vecs_size));
-	iterate_vectors(&draw, average_vectors);
+	iterate_vectors(&draw, get_average);
 	matrix_translate(draw.matrix4, \
 					-1 * draw.vecs_ave.x, 0, -1 * draw.vecs_ave.z);
 	iterate_vectors(&draw, do_matrix);
