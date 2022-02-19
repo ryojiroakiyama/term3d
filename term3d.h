@@ -37,10 +37,10 @@ void		matrix_rotate_y(double matrix[]);
 void		matrix_translate(double matrix[], \
 							const double x, const double y, const double z);
 void		put_matrix(const double matrix[]);
-void		put_vectors(t_vector *vecs, size_t vecs_size);
+void		put_vecs(t_vector *vecs, size_t vecs_size);
 void		putmap(int *put, size_t size);
-void		vecs_iter(t_draw *d, void (*f)(t_vector *v, t_draw *d));
-void		get_average_vecs(t_vector *v, t_draw *d);
+void		iterate_vecs(t_draw *d, void (*f)(t_vector *v, t_draw *d));
+void		average_vecs(t_vector *v, t_draw *d);
 void		do_matrix(t_vector *v, t_draw *d);
 void		mapping(t_vector *v, t_draw *d);
 
