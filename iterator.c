@@ -36,11 +36,11 @@ void	do_matrix(t_vector *v, t_draw *d)
 
 void	mapping(t_vector *v, t_draw *d)
 {
-	t_vector	tmp;
+	t_vector	vec_converted;
 	int			pixel;
 
-	tmp = affine(d->matrix4, v);
-	pixel = convert_to_mapindex(&tmp);
-	if (0 <= pixel && pixel <= d->map_size && (size_t)d->map[pixel] < strlen(ASCII) - 1)
+	vec_converted = affine(d->matrix4, v);
+	if (convert_to_mapindex(&vec_converted, &pixel) \
+		&& d->map[pixel] < (int)(strlen(ASCII) - 1))
 		d->map[pixel]++;
 }

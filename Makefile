@@ -20,7 +20,8 @@ SRCNAME	=	affine.c \
 			string_to_vectors.c
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCNAME))
 OBJS	= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
-DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.o=.d)))
+#DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.o=.d)))
+DPS		= $(OBJS:.o=.d)
 
 .PHONY: all
 all: $(NAME)

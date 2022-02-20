@@ -2,7 +2,6 @@
 # define TERM3D_H
 
 # include <stddef.h>
-
 # define W_MAP 61
 # define H_MAP 31
 # define SCALE 5
@@ -32,7 +31,7 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size);
 char		*read_file(const char *file_name);
 size_t		count_new_line(char *content);
 void		exit_with_error(const char *massage);
-int			convert_to_mapindex(const t_vector *v);
+double		convert_to_mapindex(const t_vector *v, int *mapindex);
 t_vector	affine(const double matrix[], const t_vector *v);
 void		matrix_unit(double matrix[]);
 void		matrix_rotate_y(double matrix[]);

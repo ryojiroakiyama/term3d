@@ -23,9 +23,9 @@ void	put_map(int *put, size_t size)
 	{
 		if (i % W_MAP == 0)
 			putoffset();
+		putchar(ASCII[put[i]]);
 		if ((i + 1) % W_MAP == 0)
 			putchar('\n');
-		putchar(ASCII[put[i]]);
 		i++;
 	}
 }
