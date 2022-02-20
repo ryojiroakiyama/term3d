@@ -11,10 +11,11 @@ SRCNAME	=	affine.c \
 			count_new_line.c \
 			exit_with_error.c \
 			iterator.c \
+			iterate_funcs.c \
 			main.c \
 			matrix.c \
 			print_debug.c \
-			putmap.c \
+			put_map.c \
 			read_file.c \
 			string_to_vectors.c
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCNAME))
