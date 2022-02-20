@@ -8,6 +8,7 @@
 # define SCALE 5
 # define OFFSET 5
 # define DIMENSION 4
+# define USLEEP 50000
 # define ASCII " .+*$A"
 
 typedef struct s_vector

@@ -18,6 +18,6 @@ int	main(void)
 		matrix_rotate_y(draw.matrix4);
 		iterate_vectors(&draw, mapping);
 		put_map(draw.map, draw.map_size);
-		usleep(50000);
+		usleep(USLEEP);
 	}
 }
