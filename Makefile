@@ -8,7 +8,6 @@ OBJDIR	= ./obj
 DPSDIR	= ./dps
 
 SRCNAME	=	affine.c \
-			convert_coordinates.c \
 			count_new_line.c \
 			exit_with_error.c \
 			iterator.c \
