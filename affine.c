@@ -11,7 +11,7 @@ t_vector	affine(const double matrix[], const t_vector *v)
 	t_vector	a;
 
 	a.x = calculate_oneline(matrix, v);
-	a.y = calculate_oneline(matrix + 4, v);
-	a.z = calculate_oneline(matrix + 8, v);
+	a.y = calculate_oneline(matrix + DIMENSION, v);
+	a.z = calculate_oneline(matrix + DIMENSION * 2, v);
 	return (a);
 }

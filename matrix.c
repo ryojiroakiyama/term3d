@@ -10,9 +10,9 @@ void	matrix_unit(double matrix[])
 	int	i;
 
 	i = 0;
-	while (i < 16)
+	while (i < DIMENSION * DIMENSION)
 	{
-		if (i % 5 == 0)
+		if (i % (DIMENSION + 1) == 0)
 			matrix[i] = 1;
 		else
 			matrix[i] = 0;
@@ -43,7 +43,7 @@ void	matrix_translate(double matrix[], const double x, \
 							const double y, const double z)
 {
 	matrix_unit(matrix);
-	matrix[4 * 0 + 3] = x;
-	matrix[4 * 1 + 3] = y;
-	matrix[4 * 2 + 3] = z;
+	matrix[DIMENSION * 1 - 1] = x;
+	matrix[DIMENSION * 2 - 1] = y;
+	matrix[DIMENSION * 3 - 1] = z;
 }

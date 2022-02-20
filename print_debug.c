@@ -6,9 +6,9 @@ void	put_matrix(const double matrix[])
 	int	i;
 
 	i = 0;
-	while (i < 16)
+	while (i < DIMENSION * DIMENSION)
 	{
-		if (i % 4 == 0)
+		if (i % DIMENSION == 0)
 			printf("\n");
 		printf(" %f,", matrix[i]);
 		i++;
