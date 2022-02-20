@@ -41,6 +41,6 @@ void	mapping(t_vector *v, t_draw *d)
 
 	tmp = affine(d->matrix4, v);
 	pixel = convert_to_mapindex(&tmp);
-	if (0 <= pixel && pixel <= d->map_size && d->map[pixel] < strlen(ASCII) - 1)
+	if (0 <= pixel && pixel <= d->map_size && (size_t)d->map[pixel] < strlen(ASCII) - 1)
 		d->map[pixel]++;
 }

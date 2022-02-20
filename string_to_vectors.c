@@ -35,6 +35,7 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size)
 	size_t		index;
 	char		*end;
 
+	end = NULL;
 	*vectors_size = count_new_line(content);
 	vectors = malloc(sizeof(*vectors) * *vectors_size);
 	index = 0;
