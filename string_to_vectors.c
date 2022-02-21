@@ -44,6 +44,6 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size)
 		content = string_to_vector(content, vectors, index, end);
 		++index;
 	}
-	*vectors_size = ++index;
+	*vectors_size = index;
 	return (vectors);
 }
