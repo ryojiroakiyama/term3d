@@ -20,11 +20,10 @@ SRCNAME	=	affine.c \
 			string_to_vectors.c
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCNAME))
 OBJS	= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
-#DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.o=.d)))
-DPS		= $(OBJS:.o=.d)
+DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.o=.d)))
 
 .PHONY: all
-all: $(NAME)
+all: makedir $(NAME)
 
 -include $(DPS)
 
@@ -32,8 +31,12 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -MF $(DPSDIR)/$(notdir $(<:.c=.d)) -c $< -o $@
+
+.PHONY: makedir
+makedir :
 	mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	mkdir -p $(DPSDIR)
 
 .PHONY: clean
 clean:

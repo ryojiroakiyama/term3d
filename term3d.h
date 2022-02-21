@@ -4,7 +4,6 @@
 # include <stddef.h>
 # define W_MAP 61
 # define H_MAP 31
-# define SCALE 5
 # define OFFSET 5
 # define DIMENSION 4
 # define USLEEP 50000
@@ -25,6 +24,7 @@ typedef struct s_draw
 	int			map[W_MAP * H_MAP];
 	int			map_size;
 	double		matrix4[16];
+	double		scale;
 }	t_draw;
 
 t_vector	*string_to_vectors(char *content, size_t *vectors_size);
