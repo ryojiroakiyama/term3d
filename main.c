@@ -46,12 +46,14 @@ void	key_event(t_draw *draw)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_draw	draw;
 
+	if (argc != 2)
+		exit_with_error("Invalid argument\nusage: ./term3d [3dfile.3d]");
 	draw.map_size = W_MAP * H_MAP;
-	draw.vecs = string_to_vectors(read_file("./torus.3d"), &(draw.vecs_size));
+	draw.vecs = string_to_vectors(read_file(argv[1]), &(draw.vecs_size));
 	iterate_vectors(&draw, get_average);
 	matrix_translate(draw.matrix4, \
 		-1 * draw.vecs_ave.x, -1 * draw.vecs_ave.y, -1 * draw.vecs_ave.z);

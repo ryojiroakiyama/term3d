@@ -38,6 +38,8 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size)
 	end = NULL;
 	*vectors_size = count_new_line(content);
 	vectors = malloc(sizeof(*vectors) * *vectors_size);
+	if (!vectors)
+		exit_with_error(NULL);
 	index = 0;
 	while (*content)
 	{
