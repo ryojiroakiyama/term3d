@@ -23,7 +23,7 @@ OBJS	= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.c=.d)))
 
 .PHONY: all
-all: makedir $(NAME)
+all: $(OBJDIR) $(DPSDIR) $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
@@ -33,10 +33,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 -include $(DPS)
 
-.PHONY: makedir
-makedir :
-	@mkdir -p $(OBJDIR)
-	@mkdir -p $(DPSDIR)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(DPSDIR):
+	mkdir -p $(DPSDIR)
 
 .PHONY: clean
 clean:
