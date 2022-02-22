@@ -43,5 +43,6 @@ void		iterate_vectors(t_draw *d, void (*f)(t_vector *v, t_draw *d));
 void		get_average(t_vector *v, t_draw *d);
 void		do_matrix(t_vector *v, t_draw *d);
 void		mapping(t_vector *v, t_draw *d);
+void		key_event(t_draw *draw);
 
 #endif /* TERM3D_H */

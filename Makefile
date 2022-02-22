@@ -17,7 +17,8 @@ SRCNAME	=	affine.c \
 			print_debug.c \
 			put_map.c \
 			read_file.c \
-			string_to_vectors.c
+			string_to_vectors.c \
+			key_event.c
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCNAME))
 OBJS	= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.c=.d)))
