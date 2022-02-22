@@ -23,7 +23,8 @@ void	do_matrix(t_vector *v, t_draw *d)
 	*v = affine(d->matrix4, v);
 }
 
-static double	convert_to_mapindex(const t_vector *v, int *mapindex, double scale)
+static double	convert_to_mapindex(const t_vector *v, \
+									int *mapindex, double scale)
 {
 	int		xi;
 	int		yi;

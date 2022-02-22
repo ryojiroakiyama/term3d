@@ -25,7 +25,6 @@ DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.c=.d)))
 .PHONY: all
 all: makedir $(NAME)
 
-
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
@@ -49,4 +48,3 @@ fclean: clean
 
 .PHONY: re
 re: fclean all
-
