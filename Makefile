@@ -1,6 +1,6 @@
 NAME	= term3d
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra -MMD -MP -I $(INCDIR)
+CFLAGS	= -Wall -Wextra -Werror -I $(INCDIR)
 
 INCDIR	= ./
 SRCDIR	= ./
@@ -20,23 +20,24 @@ SRCNAME	=	affine.c \
 			string_to_vectors.c
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCNAME))
 OBJS	= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
-DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.o=.d)))
+DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.c=.d)))
 
 .PHONY: all
 all: makedir $(NAME)
 
--include $(DPS)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -MF $(DPSDIR)/$(notdir $(<:.c=.d)) -c $< -o $@
+	$(CC) $(CFLAGS)  -MMD -MP -MF $(DPSDIR)/$(notdir $(<:.c=.d)) -c $< -o $@
+
+-include $(DPS)
 
 .PHONY: makedir
 makedir :
-	mkdir -p $(OBJDIR)
-	mkdir -p $(DPSDIR)
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(DPSDIR)
 
 .PHONY: clean
 clean:
@@ -48,3 +49,4 @@ fclean: clean
 
 .PHONY: re
 re: fclean all
+
