@@ -2,8 +2,8 @@ NAME	= term3d
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -I $(INCDIR)
 
-INCDIR	= ./
-SRCDIR	= ./
+INCDIR	= ./include
+SRCDIR	= ./src
 OBJDIR	= ./obj
 DPSDIR	= ./dps
 
@@ -49,3 +49,7 @@ fclean: clean
 
 .PHONY: re
 re: fclean all
+
+.PHONY: test
+test:
+	bash test.sh
