@@ -37,11 +37,13 @@ void		matrix_rotate_y(double matrix[]);
 void		matrix_translate(double matrix[], \
 							const double x, const double y, const double z);
 void		put_matrix(const double matrix[]);
-void		put_vectors(t_vector *vecs, size_t vecs_size);
+void		put_vectors(const t_vector *vecs, const size_t vecs_size);
+void		put_one_vector(const t_vector *v);
 void		put_map(int *put, size_t size);
 void		iterate_vectors(t_draw *d, void (*f)(t_vector *v, t_draw *d));
 void		get_average(t_vector *v, t_draw *d);
 void		do_matrix(t_vector *v, t_draw *d);
 void		mapping(t_vector *v, t_draw *d);
+void		key_event(t_draw *draw);
 
 #endif /* TERM3D_H */
