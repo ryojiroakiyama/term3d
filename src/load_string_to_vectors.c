@@ -33,6 +33,7 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size)
 {
 	t_vector	*vectors;
 	size_t		index;
+	char		*end;
 	char		*oriaddr;
 
 	oriaddr = content;
