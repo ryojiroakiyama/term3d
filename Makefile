@@ -7,18 +7,18 @@ SRCDIR	= ./src
 OBJDIR	= ./obj
 DPSDIR	= ./dps
 
-SRCNAME	=	affine.c \
-			count_new_line.c \
-			exit_with_error.c \
-			iterator.c \
-			iterate_funcs.c \
+SRCNAME	=	move_affine.c \
+			load_count_new_line.c \
+			load_exit_with_error.c \
+			move_iterator.c \
+			move_iterate_funcs.c \
 			main.c \
-			matrix.c \
-			print_debug.c \
-			put_map.c \
-			read_file.c \
-			string_to_vectors.c \
-			key_event.c
+			move_matrix.c \
+			debug_put.c \
+			draw_put_map.c \
+			load_read_file.c \
+			load_string_to_vectors.c \
+			draw_key_event.c
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCNAME))
 OBJS	= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 DPS		= $(addprefix $(DPSDIR)/, $(notdir $(SRCS:.c=.d)))
