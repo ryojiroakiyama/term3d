@@ -13,9 +13,10 @@ void	put_matrix(const double matrix[])
 		printf(" %f,", matrix[i]);
 		i++;
 	}
+	printf("\n");
 }
 
-void	put_vectors(t_vector *vecs, size_t vecs_size)
+void	put_vectors(const t_vector *vecs, const size_t vecs_size)
 {
 	size_t		idx;
 
@@ -26,4 +27,9 @@ void	put_vectors(t_vector *vecs, size_t vecs_size)
 				idx, vecs[idx].x, vecs[idx].y, vecs[idx].z);
 		idx++;
 	}
+}
+
+void	put_one_vector(const t_vector *v)
+{
+	printf("x: %lf, y: %lf, z: %lf\n", v->x, v->y, v->z);
 }

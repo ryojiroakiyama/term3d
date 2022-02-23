@@ -13,6 +13,13 @@ static void	putoffset(void)
 	}
 }
 
+static void	putusage(void)
+{
+	puts("w: size up");
+	puts("s: size down");
+	puts("q: quit");
+}
+
 void	put_map(int *put, size_t size)
 {
 	size_t	i;
@@ -28,4 +35,5 @@ void	put_map(int *put, size_t size)
 			putchar('\n');
 		i++;
 	}
+	putusage();
 }
