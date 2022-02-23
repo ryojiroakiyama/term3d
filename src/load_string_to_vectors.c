@@ -33,8 +33,9 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size)
 {
 	t_vector	*vectors;
 	size_t		index;
-	char		*end;
+	char		*oriaddr;
 
+	oriaddr = content;
 	end = NULL;
 	*vectors_size = count_new_line(content);
 	vectors = malloc(sizeof(*vectors) * *vectors_size);
@@ -47,5 +48,6 @@ t_vector	*string_to_vectors(char *content, size_t *vectors_size)
 		++index;
 	}
 	*vectors_size = index;
+	free(oriaddr);
 	return (vectors);
 }
